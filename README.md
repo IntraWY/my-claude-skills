@@ -28,7 +28,14 @@ claude skill install <ชื่อไฟล์>.skill
 |---|------|-----------|------|
 | 1 | **visual-mockup** | ทุกครั้งที่วางแผน/แก้ไข จะเสนอทำ mockup HTML รันบน local URL เพิ่มจาก markdown (สร้างเมื่อตอบตกลง) | [`rules/visual-mockup.md`](./rules/visual-mockup.md) |
 
-**วิธีติดตั้งบนเครื่องใหม่ (PowerShell / Windows):**
+**ติดตั้งแบบเร็ว (คำสั่งเดียว — แนะนำ):**
+```powershell
+git clone https://github.com/IntraWY/my-claude-skills.git
+powershell -ExecutionPolicy Bypass -File my-claude-skills/install-rule.ps1
+```
+สคริปต์จะ copy ไฟล์ rule และเติมบรรทัด import ให้เอง (รันซ้ำได้ ไม่พัง) — เสร็จแล้วเปิด session ใหม่
+
+**หรือติดตั้งด้วยมือ (PowerShell / Windows):**
 ```powershell
 # 1. ดึง repo (clone ครั้งแรก หรือ git pull ถ้ามีแล้ว)
 git clone https://github.com/IntraWY/my-claude-skills.git
@@ -53,8 +60,9 @@ my-claude-skills/
 │   ├── SKILL.md
 │   └── verify_live.py           # helper script
 ├── sync-verify-deploy.skill
-└── rules/
-    └── visual-mockup.md         # global rule (always-on)
+├── rules/
+│   └── visual-mockup.md         # global rule (always-on)
+└── install-rule.ps1             # ตัวติดตั้ง rule คำสั่งเดียว
 ```
 
 ---
@@ -96,6 +104,6 @@ my-claude-skills/
 
 - **ประเภท**: global rule (always-on) — ไม่ใช่ skill
 - **โหลดยังไง**: import ใน `~/.claude/CLAUDE.md` ด้วยบรรทัด `@rules/visual-mockup.md`
+- **ติดตั้ง**: รัน `install-rule.ps1` (คำสั่งเดียว) หรือดูขั้นตอนที่หัวข้อ "Global rules (always-on)"
 - **ตอนสร้าง mockup**: ใช้ superpowers visual companion (ถ้ามี) หรือ fallback `python -m http.server`
 - **ไฟล์**: [`rules/visual-mockup.md`](./rules/visual-mockup.md)
-- **ติดตั้ง**: ดูหัวข้อ "Global rules (always-on)" ด้านบน
