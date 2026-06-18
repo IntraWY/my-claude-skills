@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 """Verify whether local GAS source matches what is LIVE on Apps Script.
 
+GAS-ONLY helper. This is the verifier for the "Type: GAS / clasp" path of the
+sync-verify-deploy skill. The Cloudflare Pages / static path does NOT use this —
+it verifies LIVE via inline `wrangler pages deployment list` + `curl -sI`
+(Access-lock check) + a version-meta compare (see SKILL.md).
+
 `clasp status` only lists files that would be pushed; it does NOT compare to the
 deployed script. This pulls the live source into a temp dir and byte-diffs it
 against the local files, handling Thai folder names (Python cwd= + clasp.cmd).
